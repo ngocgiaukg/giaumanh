@@ -1,0 +1,6 @@
+# Temporary files & raw zip archive
+HAI SAN.zip
+extracted/
+read_docx.ps1
+.DS_Store
+Thumbs.db

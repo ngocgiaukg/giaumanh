@@ -500,7 +500,7 @@
           <div>👤 Chủ tài khoản: <strong>Tran Thi Ngoc Giau</strong></div>
           <div>💰 Số tiền: <strong>${formatMoney(total)}</strong></div>
           <div>📝 Nội dung: <strong>GIAUMANH ${orderHint}</strong></div>
-          <div style="margin-top: 6px;"><a href="https://me.momo.vn/${momoPhone}" target="_blank" style="color: #a50064; font-weight: 700; text-decoration: underline;">👉 Bấm vào đây để mở App MoMo chuyển ngay</a></div>
+          <div style="margin-top: 8px; font-size: 0.85rem; color: #a50064; font-weight: 600;">📱 Quét mã bằng App MoMo hoặc Ngân Hàng bất kỳ</div>
         `;
       }
     } else if (selectedPaymentMethod === 'vietqr' && qrPreviewBox && qrCodeImg) {
@@ -817,6 +817,37 @@
     if (ordersModal) {
       ordersModal.addEventListener('click', (e) => {
         if (e.target === ordersModal) closeModal(ordersModal);
+      });
+    }
+
+    // MoMo Quick Modal
+    const floatMomoBtn = document.getElementById('float-momo-btn');
+    const momoModal = document.getElementById('momo-modal');
+    const closeMomoBtn = document.getElementById('close-momo-btn');
+    const copyMomoBtn = document.getElementById('copy-momo-number-btn');
+
+    if (floatMomoBtn && momoModal) {
+      floatMomoBtn.addEventListener('click', () => openModal(momoModal));
+    }
+    if (closeMomoBtn && momoModal) {
+      closeMomoBtn.addEventListener('click', () => closeModal(momoModal));
+    }
+    if (momoModal) {
+      momoModal.addEventListener('click', (e) => {
+        if (e.target === momoModal) closeModal(momoModal);
+      });
+    }
+    if (copyMomoBtn) {
+      copyMomoBtn.addEventListener('click', () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText('0969474065').then(() => {
+            showToast('Đã sao chép số Ví MoMo: 0969 474 065!');
+          }).catch(() => {
+            showToast('Số MoMo: 0969 474 065 (Tran Thi Ngoc Giau)');
+          });
+        } else {
+          showToast('Số MoMo: 0969 474 065 (Tran Thi Ngoc Giau)');
+        }
       });
     }
   }
